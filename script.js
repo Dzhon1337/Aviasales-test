@@ -3,7 +3,7 @@ const url = "http://localhost:3000/tickets";
 var dataFromServer = [];
 
 async function getData() {
-  const response = await fetch(url);
+  const response = await fetch(url + "?_sort=price");
   dataFromServer = await response.json();
   console.log(dataFromServer);
 }
@@ -93,9 +93,6 @@ setting.forEach((elem) => {
 async function changeLogo() {
   await getData();
   const tickets = document.querySelectorAll(".ticket");
-  const logo = tickets[0]
-    .querySelector(":scope > .price-logo")
-    .querySelector(":scope > .ticket-logo");
   var i = 0;
   tickets.forEach((elem) => {
     var logo = (elem
@@ -103,6 +100,9 @@ async function changeLogo() {
       .querySelector(
         ":scope > .ticket-logo"
       ).src = `http://pics.avs.io/99/36/${dataFromServer[i].carrier}.png`);
+    var price = (elem
+      .querySelector(":scope > .price-logo")
+      .querySelector(":scope > .price").textContent = dataFromServer[i].price);
     i++;
   });
 }
