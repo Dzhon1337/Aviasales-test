@@ -81,15 +81,31 @@ var settingValue = ["4"];
 
 settings.forEach((setting) => {
   setting.addEventListener("change", () => {
+    var temp = [...settingValue];
+    console.log(temp);
     settingValue = Array.from(settings)
       .filter((i) => i.checked)
       .map((i) => i.value);
+    console.log(settingValue);
     if (settingValue.length === 0) {
       settings[0].checked = true;
+      settingValue = ["4"];
+    }
+    if (temp[0] !== "4" && settingValue[0] === "4") {
+      settingValue = ["4"];
+      settings[0].checked = true;
+      settings[1].checked = false;
+      settings[2].checked = false;
+      settings[3].checked = false;
+      settings[4].checked = false;
     }
     if (settingValue.length > 1) {
+      if (settingValue[0] === "4") {
+        settingValue.shift();
+      }
       settings[0].checked = false;
     }
+
     changeTicket();
     console.log(settingValue);
   });
