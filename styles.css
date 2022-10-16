@@ -185,7 +185,32 @@ button {
   text-transform: none;
 }
 
+span {
+  vertical-align: super;
+}
+
+.setting {
+  width: 100%;
+  padding: 10px 20px;
+  height: 40px;
+  text-transform: none;
+  font-weight: 400;
+  line-height: 20px;
+  font-size: 13px;
+  letter-spacing: 0;
+  transition: 0.15s;
+  display: block;
+}
+
 .checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
   width: 20px;
   height: 20px;
   border: solid 1px #9abbce;
@@ -194,32 +219,22 @@ button {
   margin-right: 10px;
 }
 
-.check {
-  top: -2px;
-  right: -3px;
-  position: relative;
-}
-
-span {
-  vertical-align: super;
-}
-
-.setting {
-  padding: 10px 20px;
-  max-height: 40px;
-  text-transform: none;
-  font-weight: 400;
-  line-height: 20px;
-  font-size: 13px;
-  letter-spacing: 0;
-  transition: 0.15s;
-}
-
-.checkbox-active {
-  border: solid 1px #2196f3;
+.checkmark::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: none;
   background-repeat: no-repeat;
   background-position: 50%;
   background-image: url(./img/checked.svg);
+}
+
+.checkbox:checked ~ .checkmark::after {
+  display: block;
+}
+
+.checkbox:checked ~ .checkmark {
+  border: solid 1px #2196f3;
 }
 
 .setting:hover {
